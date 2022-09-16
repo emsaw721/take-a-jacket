@@ -1,15 +1,11 @@
 .jumbotron {
     background-color: blue;
-    background-image: linear-gradient(to left, blue,lightblue);
+    background-image: linear-gradient(to left,rgb(34, 6, 113),rgb(148, 157, 238));
     text-align: center; 
     color: white; 
 }
 
 .searchbox {
-    display: flex; 
-    flex-wrap: wrap;
-    flex-direction: column;
-    flex-basis: 200px; 
     border-bottom: 3px solid gray; 
     padding: 5px; 
 
@@ -17,16 +13,33 @@
 
 .searchbar {
     padding: 0 0 15px 0; 
+    display: flex; 
+    flex-direction: column;
+    align-content: center;
 }
 
 .srchbtn {
-    background-color: blue;
+    background-color:rgb(148, 157, 238);
     color: white; 
-    margin: 5px; 
+    margin: 5px 0 0 0; 
     border-radius: 5px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.pastsrch {
+    background-color: gray;
+    color: black; 
+    margin: 5px 0 0 0; 
+    border-radius: 5px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .weatherdisplay {
-    display: flex; 
+   border: 2px solid darkgray; 
+   margin-left: 15px;
 
 }

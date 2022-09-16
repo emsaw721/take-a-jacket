@@ -14,20 +14,23 @@
   <body>
     <header class="jumbotron display-3">Weather Dashboard</header>
 <div class="container row">
-    <div class="searchbox col-5">
+    <div class="searchbox col-4">
         <h4>Search for a City: </h4>
-        <textarea class="searchbar"></textarea>
-        <button class="srchbtn">Search</button>
+        <textarea class="searchbar w-100"></textarea>
+        <button class="srchbtn w-100">Search</button>
+        <div class="pastsrch w-100"></div>
     </div>
 
-    <div class="weatherdisplay col-7">
-        <h3>Dashboard</h3>
+    <div class="weatherdisplay col-8">
+        <div class="dash">
+        <h3>Location Name</h3>
         <div class="icondisplay"></div>
         <div class="icon"></div>
+        </div>
     </div>
 </div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="./assets/js/redo.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
