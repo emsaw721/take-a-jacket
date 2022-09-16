@@ -41,12 +41,11 @@ ul {
     text-decoration: none;
     list-style: none;
     background-color: gray; 
-    color: black; 
+    border-radius: 10px;
 
 }
 
 ul li {
-    background-color: gray; 
     color: black; 
 }
 
