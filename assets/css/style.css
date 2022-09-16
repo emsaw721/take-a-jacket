@@ -37,7 +37,7 @@
     align-items: center; 
 }
 
-ul {
+button {
     text-decoration: none;
     list-style: none;
     background-color: gray; 
@@ -45,9 +45,7 @@ ul {
 
 }
 
-ul li {
-    color: black; 
-}
+
 
 .weatherdisplay {
    border: 2px solid darkgray; 

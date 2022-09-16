@@ -19,15 +19,14 @@ $(".srchbtn").click(function () {
    
 
     // function pastSearchItems() {
-        var ul = document.createElement("ul");
-        ul.setAttribute("class", "w-100");
+        var btn = document.createElement("button");
+        btn.setAttribute("class", "w-100");
+        btn.setAttribute("text", localStorage.getItem(textInput)); 
 
-        document.getElementById("pastsearch").appendChild(ul);
+        document.getElementById("pastsearch").appendChild(btn);
 
 
-        var li = document.createElement("li");
-        ul.appendChild(li);
-        li.textContent= localStorage.getItem(textInput);
+       
 
 
        
