@@ -38,8 +38,15 @@
     align-items: center; 
 }
 
+ul {
+    text-decoration: none;
+    list-style-type: none;
+}
+
 .weatherdisplay {
    border: 2px solid darkgray; 
    margin-left: 15px;
+   display: flex;
+   flex-wrap: wrap;
 
 }
