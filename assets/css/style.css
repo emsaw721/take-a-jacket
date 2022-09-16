@@ -1,0 +1,32 @@
+.jumbotron {
+    background-color: blue;
+    background-image: linear-gradient(to left, blue,lightblue);
+    text-align: center; 
+    color: white; 
+}
+
+.searchbox {
+    display: flex; 
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 200px; 
+    border-bottom: 3px solid gray; 
+    padding: 5px; 
+
+}
+
+.searchbar {
+    padding: 0 0 15px 0; 
+}
+
+.srchbtn {
+    background-color: blue;
+    color: white; 
+    margin: 5px; 
+    border-radius: 5px; 
+}
+
+.weatherdisplay {
+    display: flex; 
+
+}
