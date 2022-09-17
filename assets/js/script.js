@@ -2,6 +2,13 @@
 var currentCity= "Houston, TX"
 var pastCities= []; 
 
+function dayToday() {
+    var date = Date();
+    console.log(date); 
+}; 
+
+dayToday(); 
+
 $(".srchbtn").click(function() {
     console.log("click"); 
 
@@ -46,7 +53,7 @@ getCityHistory();
 function getCityHistory() {
     $(".citybtn").click(function(event) {
         currentCity = $(this).text(); 
-        // getTodayWeather(); 
+        getTodayWeather(); 
 
     }
     )
@@ -54,13 +61,21 @@ function getCityHistory() {
 }; 
 
 
-// function getTodayWeather() {
+function getTodayWeather() {
+    var weatherURL= "https://api.openweathermap.org/data/2.5/weather?lat=29.7604N&lon=95.3698W&appid=59698fd4ce1ba5e4033035d843a189b7"; 
 
-//     var weatherURL= api.openweathermap.org/data/2.5/forecast?q={city name},{state code},{country code}&appid={API key}; 
-// }
+    $.ajax({
+        url: weatherURL, 
+        method: "GET"
+    }).then(function(response) {
+        cityName = $("<h3").text(response.name + "" + dayToday());
+        $(".location").append(cityName); 
+    }
+    )
+}
 
 // function getSelectedWeather() {
-//     var weatherURL= api.openweathermap.org/data/2.5/forecast?q={city name},{state code},{country code}&appid={API key}; 
+//     var weatherURL= "https://api.openweathermap.org/data/2.5/forecast?q=" +city name + "," +state code + "," + country code + ","&appid=59698fd4ce1ba5e4033035d843a189b7"; 
 // }
 
 
