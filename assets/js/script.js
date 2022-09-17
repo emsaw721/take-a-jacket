@@ -1,5 +1,5 @@
 
-var currentCity 
+var currentCity= "Houston, TX"
 var pastCities= []; 
 
 $(".srchbtn").click(function() {
@@ -30,40 +30,43 @@ var btnContainer = document.getElementById("pastsearch");
     var btn = document.createElement("button");
     btn.innerHTML = pastCities[i]; 
     btn.setAttribute("class", "citybtn"); 
+    btn.setAttribute("type", "button"); 
     btnContainer.append(btn); 
 
  }; 
  
 $("#textarea").val("");
 
-}); 
-// getCityHistory(); 
-//  }); 
 
-// function getCityHistory() {
+getCityHistory(); 
+ }); 
 
+
+ // reloads weather information when past city button clicked
+function getCityHistory() {
+    $(".citybtn").click(function(event) {
+        currentCity = $(this).text(); 
+        // getTodayWeather(); 
+
+    }
+    )
+
+}; 
+
+
+// function getTodayWeather() {
+
+//     var weatherURL= api.openweathermap.org/data/2.5/forecast?q={city name},{state code},{country code}&appid={API key}; 
+// }
+
+// function getSelectedWeather() {
+//     var weatherURL= api.openweathermap.org/data/2.5/forecast?q={city name},{state code},{country code}&appid={API key}; 
 // }
 
 
 
-// $(".srchbtn").click(function () {
-//     console.log("clicked");
 
-//     var textInput = $(this).parent().find("textarea").val();
-//     console.log(textInput);
-//     localStorage.setItem("cities", textInput);
-//     // return selectedWeatherOutput(); // this will retrieve weather data from API
 
-//     $("#pastsearch").append("<button class='citybtn w-100' type='submit'>" + textInput + "</button"); 
+
   
-
-//     $("#textarea").val("");
-
-// });
-
-
-
-   // function selectedWeatherOutput() {
-
-    // }
 

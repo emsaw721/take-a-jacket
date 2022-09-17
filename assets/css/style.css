@@ -5,6 +5,8 @@
     color: white; 
 }
 
+
+
 .searchbox {
     
     padding: 5px; 
@@ -49,9 +51,5 @@
 
 
 .weatherdisplay {
-   border: 2px solid darkgray; 
-   margin-left: 15px;
-   display: flex;
-   flex-wrap: wrap;
 
 }
