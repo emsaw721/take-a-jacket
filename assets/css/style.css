@@ -37,14 +37,15 @@
     align-items: center; 
 }
 
-button {
-    text-decoration: none;
-    list-style: none;
+.citybtn {
+    color: black; 
     background-color: gray; 
+    margin: 5px 0; 
     border-radius: 10px;
+    color: black; 
+    padding: 5px; 
 
 }
-
 
 
 .weatherdisplay {

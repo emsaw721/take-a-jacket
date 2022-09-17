@@ -13,29 +13,12 @@ $(".srchbtn").click(function () {
     localStorage.setItem("cities", textInput);
     // return selectedWeatherOutput(); // this will retrieve weather data from API
 
+    $("#pastsearch").append("<button class='citybtn w-100' type='submit'>" + textInput + "</button"); 
+  
 
-    // return pastSearchItems(); //this will display already searched citiies 
+    $("#textarea").val("");
 
-   
-
-    // function pastSearchItems() {
-        var btn = document.createElement("button");
-        btn.setAttribute("class", "w-100");
-        btn.setAttribute("text", localStorage.getItem(textInput)); 
-
-        document.getElementById("pastsearch").appendChild(btn);
-
-
-       
-
-
-       
-    // };
-
-    
-    $("#textarea").val(""); 
-
-}); 
+});
 
 
 
