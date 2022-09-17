@@ -64,7 +64,7 @@ function getCurrentCity() {
         if (response.ok) {
             console.log(response);
             response.json().then(function (location) {
-                locationEl.setAttribute("text", location.name);
+                $(".location").text(location.name);
             })
         }
         else {
@@ -91,15 +91,17 @@ getCurrentCity();
 function getTodayWeather() {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
 
+
+   
     var dailyStats = document.createElement("ul");
-    $(".location").append(dailyStats);
+    $(".dash").append(dailyStats);
 
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
             response.json().then(function (forecast) {
                 console.log(forecast);
                 var tempLi = document.createElement("li");
-                tempLi.innerHTML = $(".location").append("Temp:" + forecast.main);
+                tempLi.innerHTML = $(dailyStats).append("Temp:" + forecast.wind); 
                 $(dailyStats).append(tempLi);
             }
             )
