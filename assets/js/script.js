@@ -6,15 +6,33 @@ $(".srchbtn").click(function() {
 
     currentCity = $(this).parent().find("textarea").val(); 
 
-    if (city === "") {
+    if (currentCity === "") {
         return; 
     }; 
 
     pastCities.push(currentCity); 
 
+    localStorage.setItem("pastcities", JSON.stringify(pastCities)); 
+
+    for (i=0; i < pastCities.length; i++) {
+        $(pastCities[i]).each(function() {
+            $("#pastsearch").append("<button class='citybtn w-100' type='submit'>" + localStorage.getItem(JSON.parse(pastCities)) + "</button"); 
+    } ); 
+}
+
+    
+    $("#textarea").val("");
+}
+); 
+
+getCityHistory(); 
+
+
+function getCityHistory() {
 
 }
-)
+
+
 
 
 // $(".srchbtn").click(function () {
