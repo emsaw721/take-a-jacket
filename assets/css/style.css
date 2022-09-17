@@ -51,5 +51,18 @@
 
 
 .weatherdisplay {
+    border-radius: 5px; 
 
+}
+
+ul{
+    display:flex;
+    flex-direction: column;
+
+}
+
+ul li{
+    list-style:none; 
+    display:flex;
+    flex-direction: column;
 }

@@ -1,78 +1,154 @@
 
-var currentCity= "Houston, TX"
-var pastCities= []; 
+var currentCity = "Houston, TX"
+var pastCities = [];
+var locationEl = document.querySelector(".location");
 
 function dayToday() {
     var date = Date();
-    console.log(date); 
-}; 
+    console.log(date);
+};
 
-dayToday(); 
+dayToday();
 
-$(".srchbtn").click(function() {
-    console.log("click"); 
+$(".srchbtn").click(function () {
+    console.log("click");
 
-    currentCity = $(this).parent().find("textarea").val(); 
+    currentCity = $(this).parent().find("textarea").val();
 
     if (currentCity === "") {
-        return; 
-    }; 
+        return;
+    };
 
-    pastCities.push(currentCity); 
+    pastCities.push(currentCity);
 
-    localStorage.setItem("pastcities", JSON.stringify(pastCities)); 
-    console.log(localStorage.getItem("pastcities")); 
-
-//     for (i=0; i < pastCities.length; i++) {
-//         $(pastCities[i]).each(function() {
-//             //$("#pastsearch").append("<button class='citybtn w-100' type='button'>" + localStorage.getItem(JSON.parse(pastCities)) + "</button"); 
-//     } ); 
-// }
+    localStorage.setItem("pastcities", JSON.stringify(pastCities));
+    console.log(localStorage.getItem("pastcities"));
 
 
-var btnContainer = document.getElementById("pastsearch"); 
 
- for (i=0; i < pastCities.length; i++) {
-   
-    var btn = document.createElement("button");
-    btn.innerHTML = pastCities[i]; 
-    btn.setAttribute("class", "citybtn"); 
-    btn.setAttribute("type", "button"); 
-    btnContainer.append(btn); 
+    var btnContainer = document.getElementById("pastsearch");
 
- }; 
- 
-$("#textarea").val("");
+    for (i = 0; i < pastCities.length; i++) {
 
+        var btn = document.createElement("button");
+        btn.innerHTML = pastCities[i];
+        btn.setAttribute("class", "citybtn");
+        btn.setAttribute("type", "button");
+        btnContainer.append(btn);
 
-getCityHistory(); 
- }); 
+    };
+
+    $("#textarea").val("");
 
 
- // reloads weather information when past city button clicked
+    getCityHistory();
+});
+
+
+// reloads weather information when past city button clicked
 function getCityHistory() {
-    $(".citybtn").click(function(event) {
-        currentCity = $(this).text(); 
-        getTodayWeather(); 
+    $(".citybtn").click(function (event) {
+        currentCity = $(this).text();
 
     }
     )
 
-}; 
+};
 
+
+function getCurrentCity() {
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
+
+
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            console.log(response);
+            response.json().then(function (location) {
+                locationEl.setAttribute("text", location.name);
+            })
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
+
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (forecast) {
+                $(".location").append(forecast.icon);
+            }
+            )
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
+    getTodayWeather();
+};
+
+getCurrentCity();
 
 function getTodayWeather() {
-    var weatherURL= "https://api.openweathermap.org/data/2.5/weather?lat=29.7604N&lon=95.3698W&appid=59698fd4ce1ba5e4033035d843a189b7"; 
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
 
-    $.ajax({
-        url: weatherURL, 
-        method: "GET"
-    }).then(function(response) {
-        cityName = $("<h3").text(response.name + "" + dayToday());
-        $(".location").append(cityName); 
-    }
-    )
-}
+    var dailyStats = document.createElement("ul");
+    $(".location").append(dailyStats);
+
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (forecast) {
+                console.log(forecast);
+                var tempLi = document.createElement("li");
+                tempLi.innerHTML = $(".location").append("Temp:" + forecast.main);
+                $(dailyStats).append(tempLi);
+            }
+            )
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+
+    })
+
+
+
+
+
+    // fetch(weatherURL).then(function (response) {
+    //     if (response.ok) {
+    //         response.json().then(function (forecast) {
+    //             var windLi = document.createElement("li");
+    //             windLi.innerHTML = $(".location").append("Wind:" + forecast.wind);
+    //             $(dailyStats).append(windLi);
+    //         }
+    //         )
+    //     }
+    //     else {
+    //         alert("Error:" + response.statusText);
+    //     }
+    // })
+
+
+
+
+    // fetch(weatherURL).then(function (response) {
+    //     if (response.ok) {
+    //         response.json().then(function (forecast) {
+    //             var humLi = document.createElement("li");
+    //             humLi.innerHTML = $(".location").append("Humidity:" + forecast.humidity);
+    //             $(dailyStats).append(humLi);
+    //         }
+    //         )
+    //     }
+    //     else {
+    //         alert("Error:" + response.statusText);
+    //     }
+    // })
+
+};
+
+
+
 
 // function getSelectedWeather() {
 //     var weatherURL= "https://api.openweathermap.org/data/2.5/forecast?q=" +city name + "," +state code + "," + country code + ","&appid=59698fd4ce1ba5e4033035d843a189b7"; 
@@ -83,5 +159,5 @@ function getTodayWeather() {
 
 
 
-  
+
 
