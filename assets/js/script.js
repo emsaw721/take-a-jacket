@@ -1,3 +1,4 @@
+
 var currentCity 
 var pastCities= []; 
 
@@ -13,25 +14,35 @@ $(".srchbtn").click(function() {
     pastCities.push(currentCity); 
 
     localStorage.setItem("pastcities", JSON.stringify(pastCities)); 
+    console.log(localStorage.getItem("pastcities")); 
 
-    for (i=0; i < pastCities.length; i++) {
-        $(pastCities[i]).each(function() {
-            $("#pastsearch").append("<button class='citybtn w-100' type='submit'>" + localStorage.getItem(JSON.parse(pastCities)) + "</button"); 
-    } ); 
-}
-
-    
-    $("#textarea").val("");
-}
-); 
-
-getCityHistory(); 
+//     for (i=0; i < pastCities.length; i++) {
+//         $(pastCities[i]).each(function() {
+//             //$("#pastsearch").append("<button class='citybtn w-100' type='button'>" + localStorage.getItem(JSON.parse(pastCities)) + "</button"); 
+//     } ); 
+// }
 
 
-function getCityHistory() {
+var btnContainer = document.getElementById("pastsearch"); 
 
-}
+ for (i=0; i < pastCities.length; i++) {
+   
+    var btn = document.createElement("button");
+    btn.innerHTML = pastCities[i]; 
+    btn.setAttribute("class", "citybtn"); 
+    btnContainer.append(btn); 
 
+ }; 
+ 
+$("#textarea").val("");
+
+}); 
+// getCityHistory(); 
+//  }); 
+
+// function getCityHistory() {
+
+// }
 
 
 
@@ -55,3 +66,4 @@ function getCityHistory() {
    // function selectedWeatherOutput() {
 
     // }
+
