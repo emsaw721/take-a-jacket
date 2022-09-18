@@ -34,15 +34,14 @@ $(".srchbtn").click(function () {
 
 
 
-    var btnContainer = document.getElementById("pastsearch");
+    var pastContainer = document.getElementById("pastsearch");
 
     for (i = 0; i < pastCities.length; i++) {
-
-        var btn = document.createElement("button");
-        btn.innerHTML = pastCities[i];
-        btn.setAttribute("class", "citybtn");
-        btn.setAttribute("type", "button");
-        btnContainer.append(btn);
+        var cities= pastCities[i]; 
+        var citiesList = document.createElement("li");
+        citiesList.text(cities); 
+        citiesList.setAttribute("class", "citybtn");
+        pastContainer.append(citiesList);
 
     };
 
@@ -114,11 +113,11 @@ function getTodayWeather() {
 
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
-            response.text().then(function (main) {
+            response.json().then(function (main) {
                 console.log(main);
 
                 var tempLi = document.createElement("li")
-                tempLi.textContent = main.temp;
+                tempLi.textContent = parseInt((response.main.temp)* 9/5 - 459); 
                 console.log(tempLi.textContent);
                 $(dailyStats).append(tempLi);
             }
