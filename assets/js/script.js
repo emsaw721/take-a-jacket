@@ -36,12 +36,13 @@ $(".srchbtn").click(function () {
 
     var pastContainer = document.getElementById("pastsearch");
 
-    for (i = 0; i < pastCities.length; i++) {
-        var cities= pastCities[i]; 
-        var citiesList = document.createElement("li");
-        citiesList.text(cities); 
-        citiesList.setAttribute("class", "citybtn");
-        pastContainer.append(citiesList);
+    for (i = 0; i <pastCities.length; i++) {
+        var btn = document.createElement("button");
+        btn.innerHTML = pastCities[i];
+        btn.setAttribute("class", "citybtn");
+        btn.setAttribute("type", "button");
+        btnContainer.append(btn);
+
 
     };
 
@@ -68,7 +69,7 @@ function getCityHistory() {
 // };
 
 
-$(".srchbtn").click(function () {
+
     function getCurrentCity() {
         var currentCity = $("#textarea").val();
         console.log(currentCity);
@@ -99,7 +100,6 @@ $(".srchbtn").click(function () {
         })
         getTodayWeather();
     }
-});
 
 
 function getTodayWeather() {
