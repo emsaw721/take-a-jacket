@@ -34,7 +34,7 @@ $(".srchbtn").click(function () {
 
 
 
-    var pastContainer = document.getElementById("pastsearch");
+    var btnContainer = document.getElementById("pastsearch");
 
     for (i = 0; i <pastCities.length; i++) {
         var btn = document.createElement("button");
