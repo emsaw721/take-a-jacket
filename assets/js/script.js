@@ -73,13 +73,13 @@ function getCityHistory() {
     function getCurrentCity() {
         var currentCity = $("#textarea").val();
         console.log(currentCity);
-        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
+        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7";
 
         fetch(weatherURL).then(function (response) {
             if (response.ok) {
                 console.log(response);
                 response.json().then(function (location) {
-                    $(locationEl).text(weather.item.name);
+                    $(locationEl).text(location.name);
                 })
             }
             else {
@@ -113,11 +113,12 @@ function getTodayWeather() {
 
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
-            response.json().then(function (main) {
-                console.log(main);
+            console.log(response); 
+            response.json().then(function(location) {
+                console.log(location);
 
                 var tempLi = document.createElement("li")
-                tempLi.textContent = parseInt((response.main.temp)* 9/5 - 459); 
+                tempLi.textContent(location.temp); 
                 console.log(tempLi.textContent);
                 $(dailyStats).append(tempLi);
             }
@@ -162,6 +163,8 @@ function getTodayWeather() {
     })
 
 };
+
+getCurrentCity(); 
 
 // function getSelectedWeather() {
 //     var weatherURL= "https://api.openweathermap.org/data/2.5/forecast?q=" +city name + "," +state code + "," + country code + ","&appid=59698fd4ce1ba5e4033035d843a189b7"; 
