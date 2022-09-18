@@ -1,22 +1,35 @@
 
-var currentCity = "Houston, TX"
 var pastCities = [];
 var locationEl = document.querySelector(".location");
+var weather; 
+//var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
+
+
+$(document).ready(function()  {
+    $("#textarea").val("Houston"); 
+}); 
+
 
 function dayToday() {
     var date = Date();
     console.log(date);
+    $(locationEl).append(date); 
+
 };
 
 dayToday();
 
+
+
 $(".srchbtn").click(function () {
     console.log("click");
 
-    currentCity = $(this).parent().find("textarea").val();
+    var currentCity =  $("#textarea").val();  
+    console.log(currentCity); 
+    //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
 
     if (currentCity === "") {
-        return;
+        alert("Please enter city name.")
     };
 
     pastCities.push(currentCity);
@@ -54,16 +67,18 @@ function getCityHistory() {
     )
 
 };
+ 
 
+function getData() {
+    weather = data; 
+}; 
 
 function getCurrentCity() {
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
-
-
-    fetch(weatherURL, {
-        method: "GET",
-        "headers": {},
-    }).then(function (response) {
+    var currentCity =  $("#textarea").val();  
+    console.log(currentCity); 
+    //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
+    
+    fetch(weatherURL).then(function (response) {
         if (response.ok) {
             console.log(response);
             response.json().then(function (location) {
@@ -92,10 +107,11 @@ function getCurrentCity() {
 getCurrentCity();
 
 function getTodayWeather() {
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
+    var currentCity =  $("#textarea").val();  
+    console.log(currentCity); 
+    //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
 
 
-   
     var dailyStats = document.createElement("ul");
     $(".dash").append(dailyStats);
 
@@ -105,7 +121,7 @@ function getTodayWeather() {
                 console.log(main);
                
                 var tempLi = document.createElement("li")
-                tempLi.textContent= main.text; 
+                tempLi.textContent=weather.main.temp; 
                 console.log(tempLi.textContent); 
                 $(dailyStats).append(tempLi);
             }
@@ -125,7 +141,7 @@ function getTodayWeather() {
         if (response.ok) {
             response.json().then(function (main) {
                 var pressLi = document.createElement("li");
-                pressLi.textContent = $("dailyStats").append(main.pressure);
+                pressLi.textContent = weather.main.pressure; 
                 $(dailyStats).append(pressLi);
             }
             )
