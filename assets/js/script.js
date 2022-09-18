@@ -60,7 +60,10 @@ function getCurrentCity() {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=29.6918&lon=-95.6526&appid=59698fd4ce1ba5e4033035d843a189b7";
 
 
-    fetch(weatherURL).then(function (response) {
+    fetch(weatherURL, {
+        method: "GET",
+        "headers": {},
+    }).then(function (response) {
         if (response.ok) {
             console.log(response);
             response.json().then(function (location) {
@@ -74,8 +77,8 @@ function getCurrentCity() {
 
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
-            response.json().then(function (forecast) {
-                $(".location").append(forecast.icon);
+            response.json().then(function (weather) {
+                $(".location").append(weather.icon);
             }
             )
         }
@@ -98,10 +101,12 @@ function getTodayWeather() {
 
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
-            response.json().then(function (forecast) {
-                console.log(forecast);
-                var tempLi = document.createElement("li");
-                tempLi.innerHTML = $(dailyStats).append("Temp:" + forecast.wind); 
+            response.text().then(function (main) {  
+                console.log(main);
+               
+                var tempLi = document.createElement("li")
+                tempLi.textContent= main.text; 
+                console.log(tempLi.textContent); 
                 $(dailyStats).append(tempLi);
             }
             )
@@ -116,36 +121,36 @@ function getTodayWeather() {
 
 
 
-    // fetch(weatherURL).then(function (response) {
-    //     if (response.ok) {
-    //         response.json().then(function (forecast) {
-    //             var windLi = document.createElement("li");
-    //             windLi.innerHTML = $(".location").append("Wind:" + forecast.wind);
-    //             $(dailyStats).append(windLi);
-    //         }
-    //         )
-    //     }
-    //     else {
-    //         alert("Error:" + response.statusText);
-    //     }
-    // })
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (main) {
+                var pressLi = document.createElement("li");
+                pressLi.textContent = $("dailyStats").append(main.pressure);
+                $(dailyStats).append(pressLi);
+            }
+            )
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
 
 
 
 
-    // fetch(weatherURL).then(function (response) {
-    //     if (response.ok) {
-    //         response.json().then(function (forecast) {
-    //             var humLi = document.createElement("li");
-    //             humLi.innerHTML = $(".location").append("Humidity:" + forecast.humidity);
-    //             $(dailyStats).append(humLi);
-    //         }
-    //         )
-    //     }
-    //     else {
-    //         alert("Error:" + response.statusText);
-    //     }
-    // })
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (main) {
+                var humLi = document.createElement("li");
+                humLi.textContent = $("dailyStats").append(main.humidity);
+                $(dailyStats).append(humLi);
+            }
+            )
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
 
 };
 
