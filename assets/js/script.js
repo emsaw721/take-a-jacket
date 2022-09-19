@@ -77,31 +77,24 @@ function getCurrentCity() {
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
             console.log(response);
-            response.json().then(function (data) {
+            response.clone().json().then(function (data) {
+                console.log(response.clone().json())
                 for (const name in data.name) {
                     $(locationEl).text(data.name);
                     console.log(data.name);
                 }
+
+                for (const weather in data.weather) {
+                    $(locationEl).append(weather.icon);
+                }
             })
+            return; 
         }
         else {
             alert("Error:" + response.statusText);
         }
     })
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (const weather in data.weather) {
-                    $(locationEl).append(weather.icon);
-                }
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
     getTodayWeather();
 }
 
@@ -113,28 +106,32 @@ function getTodayWeather() {
 
 
     fetch(weatherURL).then(function (response) {
-
         if (response.ok) {
-            console.log(response);
-            response.json().then(function (data) {
-            localStorage.setItem("data",JSON.stringify(data)); 
-                for (const main in data.main) {
-                    console.log(main);
+            response.clone().json().then(function (data) {
+               for (const main in data.main) {
 
                     var tempLi = document.createElement("li");
-                    var text = localStorage.getItem("data"); 
-                    tempLi.textContent = text; 
-
+                    var textStart= localStorage.getItem("temp"); 
+                    var text =  textStart.text; 
+                    tempLi.textContent = "Temp : " + text; 
                     $(".dash").append(tempLi);
                     console.log(tempLi)
-                }
+               } 
+            
+                    var humLi = document.createElement("li");
+                    var textStart= localStorage.getItem("data"); 
+                    var text =  textStart.substring(245,247) + "%"; 
+                    humLi.textContent = "Humidity : " + text; 
+                    $(".dash").append(humLi);
+                    console.log(humLi)
+                    
+               
             }
             )
         }
         else {
             alert("Error:" + response.statusText);
         }
-
     })
 
 
@@ -142,26 +139,25 @@ function getTodayWeather() {
 
 getCurrentCity();
 
-function fiveDay() {
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-    var fiveDayStats = document.createElement("div");
-    fetch(apiURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (const list in data.list) {
-                    fiveDayStats.textContent = localStorage.getItem(list.temp);
-                    $(".forecast-items").append(fiveDayStats);
-                    console.log(fiveDayStats);
-                    break;
+// function fiveDay() {
+//     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+//     var fiveDayStats = document.createElement("div");
+//     fetch(apiURL).then(function (response) {
+//         if (response.ok) {
+//             response.clone().json().then(function (data) {
+         
+//                     fiveDayStats.textContent = "Humidity : "
+//                     $(".forecast-items").append(fiveDayStats);
+//                     console.log(fiveDayStats);
 
-                }
-            })
-        }
-    });
+                
+//             })
+//         }
+//     });
 
-}
+// }
 
-fiveDay();
+// fiveDay();
 
 
 
