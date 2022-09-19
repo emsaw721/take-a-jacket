@@ -16,6 +16,7 @@ var weather;
 
 
 
+
 $(".srchbtn").click(function () {
     console.log("click");
 
@@ -40,14 +41,20 @@ $(".srchbtn").click(function () {
     btn.setAttribute("type", "button");
     btnContainer.append(btn);
 
-
+    // $(document).on("load", function(event) {
+    //    var buttonsStay = localStorage.getItem("pastcities");
+    //     btn.innerHTML =  JSON.parse(buttonsStay); 
+    //     btn.setAttribute("class", "citybtn");
+    //     btn.setAttribute("type", "button");
+    //     btnContainer.append(btn);
+    // }); 
 
 
     $("#textarea").val("");
 
 
-    getCityHistory();
-    getCurrentCity(); 
+    // getCityHistory();
+    // getCurrentCity(); 
 });
 
 
