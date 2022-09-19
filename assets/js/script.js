@@ -69,12 +69,6 @@ function getCityHistory() {
 };
 
 
-// function getData() {
-//     weather = data;
-// };
-
-
-
 function getCurrentCity() {
     var currentCity = $("#textarea").val();
     console.log(currentCity);
@@ -118,18 +112,21 @@ function getTodayWeather() {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
 
-    var dailyStats = document.createElement("ul");
-    $(".dash").append(dailyStats);
-
     fetch(weatherURL).then(function (response) {
         if (response.ok) {
             console.log(response);
             response.json().then(function (data) {
+              
 
                  for (const main in data.main) {
+                    console.log(main); 
+                    var dailyStats = document.createElement("ul");
+                    $(".dash").append(dailyStats);
 
                 var tempLi = document.createElement("li"); 
-                $(dailyStats).append(tempLi).textContent = main.temp;
+                tempLi.textContent = main; 
+                $(dailyStats).append(tempLi);
+                console.log(dailyStats)
                  }
             }
             )
@@ -140,39 +137,6 @@ function getTodayWeather() {
 
     })
 
-
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (const main in data.main) {
-                var pressLi = document.createElement("li");
-
-                $(dailyStats).append(pressLi).textContent = main.pressure;}
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
-
-
-
-
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (const main in data.main) {
-                    var humLi = document.createElement("li");
-                    $(dailyStats).append(humLi).textContent = main.humidity;
-                }
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
 
 };
 
