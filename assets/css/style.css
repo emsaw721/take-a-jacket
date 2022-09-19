@@ -98,13 +98,15 @@
 }
 .card {
     background-color: var(--tertiary-color);
+    padding: 5px; 
 }
 
 .weatherdisplay {
     border-radius: 5px; 
     background-color: rgba(225,225,225,0.5);
-    text-align: center;
+    text-align: left;
     margin: 15px 0 0 0; 
+    padding: 10px; 
 
 }
 
@@ -112,16 +114,12 @@
     font-size: 40px;
 }
 
-ul{
-    display:flex;
-    flex-direction: column;
 
-}
-
-ul li{
+li{
     list-style:none; 
     display:flex;
     flex-direction: column;
+    justify-content: left;
 }
 
 footer {

@@ -5,14 +5,14 @@ var weather;
 //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
 
 
-// function dayToday() {
-//     var date = Date();
-//     console.log(date);
-//     $(locationEl).append(date); 
+function dayToday() {
+    var date = Date();
+ 
+    $(locationEl).append(date); 
 
-// };
+};
 
-// dayToday();
+dayToday();
 
 
 
@@ -78,7 +78,7 @@ function getCurrentCity() {
         if (response.ok) {
             console.log(response);
             response.clone().json().then(function (data) {
-                console.log(response.clone().json())
+                
                 for (const name in data.name) {
                     $(locationEl).text(data.name);
                     console.log(data.name);
@@ -105,33 +105,49 @@ function getTodayWeather() {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.clone().json().then(function (data) {
-               for (const main in data.main) {
-
-                    var tempLi = document.createElement("li");
-                    var textStart= localStorage.getItem("temp"); 
-                    var text =  textStart.text; 
-                    tempLi.textContent = "Temp : " + text; 
-                    $(".dash").append(tempLi);
-                    console.log(tempLi)
-               } 
+    // fetch(weatherURL).then(function (response) {
+        // if (response.ok) {
+            $.ajax({
+                url: weatherURL,
+                method: "GET"
+              }).then(function(response) {
+                  
+              
+                var temperatureNumber = parseInt((response.main.temp));
+                var displayTemp = $("<li>").text("Tempeture: "+ temperatureNumber + " °F");
+                $(".dash").append(displayTemp);
+              
+                var displayFeelsLike = $("<li>").text("Feels Like: "+ response.main.feels_like + " °F");
+                $(".dash").append(displayFeelsLike);
+                
+                var displayHum = $("<li>").text("Humidity: "+ response.main.humidity + " %");
+                $(".dash").append(displayHum);
+            // response.clone().json().then(function (data) {
+            //     console.log(data)
+            //    for (const main in data.main) {
+            //         var tempLi = document.createElement("li");
+            //         var textStart= parseInt(data); 
+            //         console.log(textStart); 
+            //         var text =  textStart.text; 
+            //         tempLi.textContent = "Temp : " + text; 
+            //         $(".dash").append(tempLi);
+            //         console.log(tempLi)
+            //    } 
             
-                    var humLi = document.createElement("li");
-                    var textStart= localStorage.getItem("data"); 
-                    var text =  textStart.substring(245,247) + "%"; 
-                    humLi.textContent = "Humidity : " + text; 
-                    $(".dash").append(humLi);
-                    console.log(humLi)
+            //         var humLi = document.createElement("li");
+            //         var textStart= localStorage.getItem("data"); 
+            //         var text =  textStart.substring(245,247) + "%"; 
+            //         humLi.textContent = "Humidity : " + text; 
+            //         $(".dash").append(humLi);
+            //         console.log(humLi)
                     
                
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
+            // }
+            // )
+        // }
+        // else {
+        //     alert("Error:" + response.statusText);
+        // }
     })
 
 
@@ -139,9 +155,25 @@ function getTodayWeather() {
 
 getCurrentCity();
 
-// function fiveDay() {
-//     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-//     var fiveDayStats = document.createElement("div");
+function fiveDay() {
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    var fiveDayStats = document.createElement("div");
+    $(".forecast-items").append(fiveDayStats); 
+
+    $.ajax({
+        url: apiURL,
+        method: "GET"
+      }).then(function(response) {
+        var temperatureNumber = parseInt((response.list.main.temp));
+        var displayTemp = $("<p>").text("Tempeture: "+ temperatureNumber + " °F");
+        $(fiveDayStats).append(displayTemp);
+      
+        var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
+        $(fiveDayStats).append(displayFeelsLike);
+        
+        var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
+        $(fiveDayStats).append(displayHum);
+
 //     fetch(apiURL).then(function (response) {
 //         if (response.ok) {
 //             response.clone().json().then(function (data) {
@@ -155,9 +187,11 @@ getCurrentCity();
 //         }
 //     });
 
-// }
+})
+} 
 
-// fiveDay();
+
+fiveDay();
 
 
 
