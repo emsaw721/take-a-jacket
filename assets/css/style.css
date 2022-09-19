@@ -1,8 +1,18 @@
+:root {
+    --primary-color: #0C1446;
+    --secondary-color: #082D4B;
+    --tertiary-color: rgb(148, 157, 238); 
+    --quaternary-color: #84939E; 
+   
+  }
+
+
+
 .jumbotron {
-    background-color: blue;
-    background-image: linear-gradient(to left,rgb(34, 6, 113),rgb(148, 157, 238));
+    background-color: var(--primary-color);
+    background-image: linear-gradient(to left, #0C1446, rgb(148, 157, 238)); 
     text-align: center; 
-    color: white; 
+    color: whitesmoke; 
 }
 
 
