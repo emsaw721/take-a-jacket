@@ -18,9 +18,12 @@
 
 
 .searchbox {
-    
     padding: 5px; 
 
+}
+
+.searchbox h4 {
+    color: var(--secondary-color); 
 }
 
 .searchbar {
@@ -28,6 +31,7 @@
     display: flex; 
     flex-direction: column;
     align-content: center;
+    color:var(--secondary-color); 
 }
 
 .srchbtn {
@@ -50,11 +54,11 @@
 }
 
 .citybtn {
-    color: black; 
-    background-color: gray; 
+    color: var(--secondary-color); 
+    background-color: var(--quaternary-color); 
     margin: 5px 0; 
     border-radius: 10px;
-    color: black; 
+    color: var(--secondary-color); 
     padding: 5px; 
 
 }
