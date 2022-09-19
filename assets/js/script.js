@@ -111,8 +111,9 @@ function getTodayWeather() {
     // console.log(currentCity);
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
-
+   
     fetch(weatherURL).then(function (response) {
+       
         if (response.ok) {
             console.log(response);
             response.json().then(function (data) {
@@ -120,13 +121,11 @@ function getTodayWeather() {
 
                  for (const main in data.main) {
                     console.log(main); 
-                    var dailyStats = document.createElement("ul");
-                    $(".dash").append(dailyStats);
-
+                  
                 var tempLi = document.createElement("li"); 
-                tempLi.textContent = main; 
-                $(dailyStats).append(tempLi);
-                console.log(dailyStats)
+                tempLi.textContent = localStorage.getItem("temp"); 
+                $(".dash").append(tempLi);
+                console.log(tempLi)
                  }
             }
             )
@@ -144,14 +143,14 @@ getCurrentCity();
 
 function fiveDay() {
     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-
+    var fiveDayStats = document.createElement("div");
     fetch(apiURL).then(function (response) {
         if (response.ok) {
             console.log(response)
             response.json().then(function (data) {
                 for (const list in data.list) {
-                var fiveDayStats = document.createElement("div");
-                $(".forecast-heading").append(fiveDayStats).textContent= list.temp; 
+                fiveDayStats.innerHTML= list; 
+                $(".forecast-heading").append(fiveDayStats); 
                 console.log(fiveDayStats); 
                 
                 }
