@@ -47,12 +47,13 @@ $(".srchbtn").click(function () {
 
 
     getCityHistory();
+    getCurrentCity(); 
 });
 
 
 // reloads weather information when past city button clicked
 function getCityHistory() {
-    $(".citybtn").click(function (event) {
+    $(".citybtn").click(function(event) {
         currentCity = $(this).text();
 
     }
@@ -67,111 +68,118 @@ function getCityHistory() {
 
 
 
-function getCurrentCity() {
-    var currentCity = $("#textarea").val();
-    console.log(currentCity);
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7";
+// function getCurrentCity() {
+//     var currentCity = $("#textarea").val();
+//     console.log(currentCity);
+//     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7";
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            console.log(response);
-            response.json().then(function (location) {
-                $(locationEl).text(location.name);
-            })
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
+//     fetch(weatherURL).then(function (response) {
+//         if (response.ok) {
+//             console.log(response);
+//             response.json().then(function (location) {
+//                 $(locationEl).text(location.name);
+//             })
+//         }
+//         else {
+//             alert("Error:" + response.statusText);
+//         }
+//     })
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (weather) {
-                $(locationEl).append(weather.icon);
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
-    getTodayWeather();
-}
-
-
-function getTodayWeather() {
-    // var currentCity = $("#textarea").val();
-    // console.log(currentCity);
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+//     fetch(weatherURL).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (weather) {
+//                 $(locationEl).append(weather.icon);
+//             }
+//             )
+//         }
+//         else {
+//             alert("Error:" + response.statusText);
+//         }
+//     })
+//     getTodayWeather();
+// }
 
 
-    var dailyStats = document.createElement("ul");
-    $(".dash").append(dailyStats);
-
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            console.log(response);
-            response.json().then(function (location) {
-                console.log(location);
-
-                var tempLi = document.createElement("li")
-                tempLi.textContent(location.temp);
-                console.log(tempLi.textContent);
-                $(dailyStats).append(tempLi);
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-
-    })
+// function getTodayWeather() {
+//     // var currentCity = $("#textarea").val();
+//     // console.log(currentCity);
+//     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (main) {
-                var pressLi = document.createElement("li");
-                pressLi.textContent = weather.main.pressure;
-                $(dailyStats).append(pressLi);
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
+//     var dailyStats = document.createElement("ul");
+//     $(".dash").append(dailyStats);
+
+//     fetch(weatherURL).then(function (response) {
+//         if (response.ok) {
+//             console.log(response);
+//             response.json().then(function (main) {
+//                 console.log(main);
+
+//                  for (const main in data.main) {
+
+//                 var tempLi = document.createElement("li"); 
+//                 $(dailyStats).append(tempLi).textContent = main.temp;
+//                  }
+//             }
+//             )
+//         }
+//         else {
+//             alert("Error:" + response.statusText);
+//         }
+
+//     })
+
+
+//     fetch(weatherURL).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (main) {
+ //   for (const main in data.main) {
+//                 var pressLi = document.createElement("li");
+
+//                 $(dailyStats).append(pressLi).textContent = main.pressure;}
+//             }
+//             )
+//         }
+//         else {
+//             alert("Error:" + response.statusText);
+//         }
+//     })
 
 
 
 
-    fetch(weatherURL).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                for (const main of data.main) {
-                    var humLi = document.createElement("li");
-                    $(dailyStats).append(humLi).textContent = main.humidity;
-                }
-            }
-            )
-        }
-        else {
-            alert("Error:" + response.statusText);
-        }
-    })
+//     fetch(weatherURL).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (data) {
+//                 for (const main in data.main) {
+//                     var humLi = document.createElement("li");
+//                     $(dailyStats).append(humLi).textContent = main.humidity;
+//                 }
+//             }
+//             )
+//         }
+//         else {
+//             alert("Error:" + response.statusText);
+//         }
+//     })
 
-};
+// };
 
-getCurrentCity();
+// getCurrentCity();
 
 function fiveDay() {
     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
     fetch(apiURL).then(function (response) {
         if (response.ok) {
+            console.log(response)
             response.json().then(function (data) {
+                for (const list in data.list) {
                 var fiveDayStats = document.createElement("div");
-                fiveDayStats.appendChild().textContent = main.temp;
+                $(".forecast-heading").append(fiveDayStats).textContent= list.temp; 
+                console.log(fiveDayStats); 
+                
+                }
             })
         }
     });
