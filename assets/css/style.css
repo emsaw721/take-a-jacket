@@ -11,14 +11,50 @@
 .jumbotron {
     background-color: var(--primary-color);
     background-image: linear-gradient(to left, #0C1446, rgb(148, 157, 238)); 
-    text-align: center; 
+    text-align: right; 
     color: whitesmoke; 
+    margin: 0; 
 }
 
+#fade-in-text {
+    animation: fadeIn 5s;
+    -webkit-animation: fadeIn 5s;
+    /* -webkit-animation: rightThenleft 5s linear; */
+}
 
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  /* @-webkit-keyframes rightThenLeft {
+    0%   {margin-right:0;}
+    50%  {margin-right:100%;}
+    100% {margin-right:0;}
+} */
+
+.bumper-1 {
+    background-color: #0C1446;
+    padding: 15px; 
+}
+
+.bumper-2 {
+    background-color: #082D4B;
+    padding: 10px; 
+}
+.container {
+    background-color: var(--tertiary-color);
+    color: white; 
+    margin: 0; 
+    padding: 0; 
+}
 
 .searchbox {
-    padding: 5px; 
+    padding: 5px 15px 5px 0; 
 
 }
 
@@ -35,7 +71,7 @@
 }
 
 .srchbtn {
-    background-color:rgb(148, 157, 238);
+    background-color: var(--primary-color);
     color: white; 
     margin: 5px 0; 
     border-radius: 5px; 
@@ -55,10 +91,8 @@
 
 .citybtn {
     color: var(--secondary-color); 
-    background-color: var(--quaternary-color); 
     margin: 5px 0; 
     border-radius: 10px;
-    color: var(--secondary-color); 
     padding: 5px; 
 
 }
@@ -66,6 +100,9 @@
 
 .weatherdisplay {
     border-radius: 5px; 
+    background-color: rgba(225,225,225,0.5);
+    text-align: center;
+    margin: 15px 0 0 0; 
 
 }
 
@@ -83,4 +120,8 @@ ul li{
     list-style:none; 
     display:flex;
     flex-direction: column;
+}
+
+footer {
+    background-color: var(--tertiary-color); 
 }
