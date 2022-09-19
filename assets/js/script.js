@@ -54,13 +54,13 @@ $(".srchbtn").click(function () {
 
 
     // getCityHistory();
-    getCurrentCity(); 
+    getCurrentCity();
 });
 
 
 // reloads weather information when past city button clicked
 function getCityHistory() {
-    $(".citybtn").click(function(event) {
+    $(".citybtn").click(function (event) {
         currentCity = $(this).text();
 
     }
@@ -79,8 +79,8 @@ function getCurrentCity() {
             console.log(response);
             response.json().then(function (data) {
                 for (const name in data.name) {
-                $(locationEl).text(data.name);
-                console.log(data.name); 
+                    $(locationEl).text(data.name);
+                    console.log(data.name);
                 }
             })
         }
@@ -93,7 +93,7 @@ function getCurrentCity() {
         if (response.ok) {
             response.json().then(function (data) {
                 for (const weather in data.weather) {
-                $(locationEl).append(weather.icon);
+                    $(locationEl).append(weather.icon);
                 }
             }
             )
@@ -111,22 +111,23 @@ function getTodayWeather() {
     // console.log(currentCity);
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
-   
+
     fetch(weatherURL).then(function (response) {
-       
+
         if (response.ok) {
             console.log(response);
             response.json().then(function (data) {
-              
+            localStorage.setItem("data",JSON.stringify(data)); 
+                for (const main in data.main) {
+                    console.log(main);
 
-                 for (const main in data.main) {
-                    console.log(main); 
-                  
-                var tempLi = document.createElement("li"); 
-                tempLi.textContent = localStorage.getItem("temp"); 
-                $(".dash").append(tempLi);
-                console.log(tempLi)
-                 }
+                    var tempLi = document.createElement("li");
+                    var text = localStorage.getItem("data"); 
+                    tempLi.textContent = text; 
+
+                    $(".dash").append(tempLi);
+                    console.log(tempLi)
+                }
             }
             )
         }
@@ -146,13 +147,13 @@ function fiveDay() {
     var fiveDayStats = document.createElement("div");
     fetch(apiURL).then(function (response) {
         if (response.ok) {
-            console.log(response)
             response.json().then(function (data) {
                 for (const list in data.list) {
-                fiveDayStats.innerHTML= list; 
-                $(".forecast-heading").append(fiveDayStats); 
-                console.log(fiveDayStats); 
-                
+                    fiveDayStats.textContent = localStorage.getItem(list.temp);
+                    $(".forecast-items").append(fiveDayStats);
+                    console.log(fiveDayStats);
+                    break;
+
                 }
             })
         }
