@@ -54,7 +54,7 @@ $(".srchbtn").click(function () {
 
 
     // getCityHistory();
-    // getCurrentCity(); 
+    getCurrentCity(); 
 });
 
 
@@ -75,36 +75,41 @@ function getCityHistory() {
 
 
 
-// function getCurrentCity() {
-//     var currentCity = $("#textarea").val();
-//     console.log(currentCity);
-//     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7";
+function getCurrentCity() {
+    var currentCity = $("#textarea").val();
+    console.log(currentCity);
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7";
 
-//     fetch(weatherURL).then(function (response) {
-//         if (response.ok) {
-//             console.log(response);
-//             response.json().then(function (location) {
-//                 $(locationEl).text(location.name);
-//             })
-//         }
-//         else {
-//             alert("Error:" + response.statusText);
-//         }
-//     })
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            console.log(response);
+            response.json().then(function (data) {
+                for (const name in data.name) {
+                $(locationEl).text(data.name);
+                console.log(data.name); 
+                }
+            })
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
 
-//     fetch(weatherURL).then(function (response) {
-//         if (response.ok) {
-//             response.json().then(function (weather) {
-//                 $(locationEl).append(weather.icon);
-//             }
-//             )
-//         }
-//         else {
-//             alert("Error:" + response.statusText);
-//         }
-//     })
-//     getTodayWeather();
-// }
+    fetch(weatherURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                for (const weather in data.weather) {
+                $(locationEl).append(weather.icon);
+                }
+            }
+            )
+        }
+        else {
+            alert("Error:" + response.statusText);
+        }
+    })
+    // getTodayWeather();
+}
 
 
 // function getTodayWeather() {
@@ -174,26 +179,26 @@ function getCityHistory() {
 
 // getCurrentCity();
 
-function fiveDay() {
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+// function fiveDay() {
+//     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
-    fetch(apiURL).then(function (response) {
-        if (response.ok) {
-            console.log(response)
-            response.json().then(function (data) {
-                for (const list in data.list) {
-                var fiveDayStats = document.createElement("div");
-                $(".forecast-heading").append(fiveDayStats).textContent= list.temp; 
-                console.log(fiveDayStats); 
+//     fetch(apiURL).then(function (response) {
+//         if (response.ok) {
+//             console.log(response)
+//             response.json().then(function (data) {
+//                 for (const list in data.list) {
+//                 var fiveDayStats = document.createElement("div");
+//                 $(".forecast-heading").append(fiveDayStats).textContent= list.temp; 
+//                 console.log(fiveDayStats); 
                 
-                }
-            })
-        }
-    });
+//                 }
+//             })
+//         }
+//     });
 
-}
+// }
 
-fiveDay();
+// fiveDay();
 
 
 
