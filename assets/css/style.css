@@ -96,7 +96,9 @@
     padding: 5px; 
 
 }
-
+.card {
+    background-color: var(--tertiary-color);
+}
 
 .weatherdisplay {
     border-radius: 5px; 
