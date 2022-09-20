@@ -30,25 +30,20 @@ $(document).ready(function () {      //shows Houston data on page load before re
         var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
         $(".dash").append(displayHum);
     })
+
     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial&cnt=5";
     $.ajax({
         url: apiURL,
         method: "GET"
-        
     }).then(function (response) {
-    for (const list in response.list) {
-        localStorage.setItem("list", list); 
-        console.log(list); 
-    }
-        for (const main in list.main) {
-        for (i = 0; i < main.length; i++) {
-            var forecastItems = $("<div>").text(main[i]);
+        for (i = 0; i < response.list.length; i++) {
+            var forecastItems = $("<div>").text(response.list[i]);
             $(forecastEl).append(forecastItems);
         }
-    }
-    })
 
-});
+
+    })
+    }); 
 
 $(".srchbtn").click(function () {
     console.log("click");
