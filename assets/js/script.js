@@ -1,12 +1,45 @@
 
 var pastCities = [];
 var locationEl = document.querySelector(".location");
-var forecastEl = document.querySelector(".forecast-items"); 
-var weather;
+var forecastEl = document.querySelector(".forecast-items");
 //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
 
-    var dayToday = moment().format("MMMM Do YYYY");; 
+var dayToday = moment().format("MMMM Do YYYY");;
 
+$(document).ready(function () {
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    $.ajax({
+        url: weatherURL,
+        method: "GET"
+    }).then(function (response) {
+
+
+        var cityName = $("<div>").text(response.name + "(" + dayToday + ")");
+        $(locationEl).append(cityName);
+
+
+        var temperatureNumber = parseInt((response.main.temp));
+        var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F");
+        $(".dash").append(displayTemp);
+
+        var displayFeelsLike = $("<li>").text("Feels Like: " + response.main.feels_like + " °F");
+        $(".dash").append(displayFeelsLike);
+
+        var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
+        $(".dash").append(displayHum);
+    })
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    $.ajax({
+        url: apiURL,
+        method: "GET"
+    }).then(function (response) {
+        for (i = 3; i < response.list.length; i++) {
+            var forecastItems = $("<div>").text(response.list[i]);
+            $(forecastEl).append(forecastItems);
+        }
+    })
+
+});
 
 $(".srchbtn").click(function () {
     console.log("click");
@@ -15,7 +48,7 @@ $(".srchbtn").click(function () {
     console.log(currentCity);
     if (currentCity === "") {
         alert("Please enter city name.")
-        return; 
+        return;
     };
 
     pastCities.push(currentCity);
@@ -45,59 +78,60 @@ $(".srchbtn").click(function () {
     $("#textarea").val("");
 
 
-    // getCityHistory();
+    getCityHistory();
     getTodayWeather();
 
 
 
-// reloads weather information when past city button clicked
-function getCityHistory() {
-    $(".citybtn").click(function (event) {
-        currentCity = $(this).text();
+    // reloads weather information when past city button clicked
+    // gonna have to be a for loop
+    function getCityHistory() {
+        $(".citybtn").click(function (event) {
+            currentCity = $(this).text();
 
-    }
-    )
+        }
+        )
 
-};
-
-
-
+    };
 
 
 
-function getTodayWeather() {
-    // var currentCity = $("#textarea").val();
-    // console.log(currentCity);
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-    
-    
-        $(".location").empty(); 
-        $(".dash").empty(); 
-        $(forecastEl).empty(); 
- 
 
 
-    // fetch(weatherURL).then(function (response) {
+
+    function getTodayWeather() {
+        // var currentCity = $("#textarea").val();
+        // console.log(currentCity);
+        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+
+
+        $(".location").empty();
+        $(".dash").empty();
+        $(forecastEl).empty();
+
+
+
+        // fetch(weatherURL).then(function (response) {
         // if (response.ok) {
-            $.ajax({
-                url: weatherURL,
-                method: "GET"
-              }).then(function(response) {
+        $.ajax({
+            url: weatherURL,
+            method: "GET"
+        }).then(function (response) {
 
 
-                  var cityName = $("<div>").text(response.name + "(" +dayToday+ ")"); 
-                  $(locationEl).append(cityName); 
-            
-                
-                var temperatureNumber = parseInt((response.main.temp));
-                var displayTemp = $("<li>").text("Tempeture: "+ temperatureNumber + " °F");
-                $(".dash").append(displayTemp);
-              
-                var displayFeelsLike = $("<li>").text("Feels Like: "+ response.main.feels_like + " °F");
-                $(".dash").append(displayFeelsLike);
-                
-                var displayHum = $("<li>").text("Humidity: "+ response.main.humidity + " %");
-                $(".dash").append(displayHum);
+            var cityName = $("<div>").text(response.name + "(" + dayToday + ")");
+            $(locationEl).append(cityName);
+
+
+            var temperatureNumber = parseInt((response.main.temp));
+            var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F");
+            $(".dash").append(displayTemp);
+
+            var displayFeelsLike = $("<li>").text("Feels Like: " + response.main.feels_like + " °F");
+            $(".dash").append(displayFeelsLike);
+
+            var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
+            $(".dash").append(displayHum);
             // response.clone().json().then(function (data) {
             //     console.log(data)
             //    for (const main in data.main) {
@@ -109,63 +143,63 @@ function getTodayWeather() {
             //         $(".dash").append(tempLi);
             //         console.log(tempLi)
             //    } 
-            
+
             //         var humLi = document.createElement("li");
             //         var textStart= localStorage.getItem("data"); 
             //         var text =  textStart.substring(245,247) + "%"; 
             //         humLi.textContent = "Humidity : " + text; 
             //         $(".dash").append(humLi);
             //         console.log(humLi)
-                    
-               
+
+
             // }
             // )
-        // }
-        // else {
-        //     alert("Error:" + response.statusText);
-        // }
-    })
+            // }
+            // else {
+            //     alert("Error:" + response.statusText);
+            // }
+        })
 
-    fiveDay();
-};
+        fiveDay();
+    };
 
-// getCurrentCity();
+    // getCurrentCity();
 
-function fiveDay() {
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-    // var fiveDayStats = document.createElement("div");
-    // $(".forecast-items").append(fiveDayStats); 
+    function fiveDay() {
+        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+        // var fiveDayStats = document.createElement("div");
+        // $(".forecast-items").append(fiveDayStats); 
 
-    $.ajax({
-        url: apiURL,
-        method: "GET"
-      }).then(function(response) {
-        for (i=3; i<response.list.length; i++) {
-            var forecastItems = $("<div>").text(response.list[i]); 
-                  $(forecastEl).append(forecastItems); 
-        }
-      
-        // var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
-        // $(forecastEl).append(displayFeelsLike);
-        
-        // var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
-        // $(forecastEl).append(displayHum);
+        $.ajax({
+            url: apiURL,
+            method: "GET"
+        }).then(function (response) {
+            for (i = 3; i < response.list.length; i++) {
+                var forecastItems = $("<div>").text(response.list[i]);
+                $(forecastEl).append(forecastItems);
+            }
 
-//     fetch(apiURL).then(function (response) {
-//         if (response.ok) {
-//             response.clone().json().then(function (data) {
-         
-//                     fiveDayStats.textContent = "Humidity : "
-//                     $(".forecast-items").append(fiveDayStats);
-//                     console.log(fiveDayStats);
+            // var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
+            // $(forecastEl).append(displayFeelsLike);
 
-                
-//             })
-//         }
-//     });
+            // var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
+            // $(forecastEl).append(displayHum);
 
-})
-} ; 
+            //     fetch(apiURL).then(function (response) {
+            //         if (response.ok) {
+            //             response.clone().json().then(function (data) {
+
+            //                     fiveDayStats.textContent = "Humidity : "
+            //                     $(".forecast-items").append(fiveDayStats);
+            //                     console.log(fiveDayStats);
+
+
+            //             })
+            //         }
+            //     });
+
+        })
+    };
 
 });
 
