@@ -2,13 +2,14 @@
 var pastCities = [];
 var locationEl = document.querySelector(".location");
 var forecastEl = document.querySelector(".forecast-items");
+var key = 59698fd4ce1ba5e4033035d843a189b7; 
 
 
 var dayToday = moment().format("MMMM Do YYYY");;
 
 $(document).ready(function () {      //shows Houston data on page load before requesting a city 
     // need to use geotag or whatever it's called
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=" +key+ "&units=imperial";
     $.ajax({
         url: weatherURL,
         method: "GET"
@@ -29,12 +30,12 @@ $(document).ready(function () {      //shows Houston data on page load before re
         var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
         $(".dash").append(displayHum);
     })
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial";
     $.ajax({
         url: apiURL,
         method: "GET"
     }).then(function (response) {
-        for (i = 3; i < response.list.length; i++) {
+        for (i = 0; i >= 158 && i < response.list.length; i++) {
             var forecastItems = $("<div>").text(response.list[i]);
             $(forecastEl).append(forecastItems);
         }
