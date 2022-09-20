@@ -34,11 +34,16 @@ $(document).ready(function () {      //shows Houston data on page load before re
     $.ajax({
         url: apiURL,
         method: "GET"
+        
     }).then(function (response) {
-        for (i = 0; i >= 158 && i < response.list.length; i++) {
-            var forecastItems = $("<div>").text(response.list[i]);
+    for (const list in response.list) {
+        for (const main in list.main) {
+        for (i = 0; i < main.length; i++) {
+            var forecastItems = $("<div>").text(main[i]);
             $(forecastEl).append(forecastItems);
         }
+    }
+    }
     })
 
 });
