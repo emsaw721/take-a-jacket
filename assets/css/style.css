@@ -6,7 +6,9 @@
    
   }
 
-
+body {
+    background-color:var(--tertiary-color); 
+}
 
 .jumbotron {
     background-color: var(--primary-color);
@@ -54,7 +56,7 @@
 }
 
 .searchbox {
-    padding: 5px 15px 5px 0; 
+    padding: 5px 15px 5px 5px; 
 
 }
 
@@ -63,7 +65,7 @@
 }
 
 .searchbar {
-    padding: 0 0 15px 0; 
+    padding: 5px; 
     display: flex; 
     flex-direction: column;
     align-content: center;
@@ -112,6 +114,7 @@
     display: flex; 
     flex-direction: column;
     align-items: center;
+    padding: 0; 
    
 }
 
@@ -126,8 +129,8 @@
 .citybtn {
     color: var(--secondary-color); 
     margin: 5px 0; 
-    border-radius: 10px;
-    padding: 5px; 
+    border-radius: 5px;
+    padding: 1px 44%; 
 
 }
 .card {
