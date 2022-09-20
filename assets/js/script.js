@@ -2,14 +2,14 @@
 var pastCities = [];
 var locationEl = document.querySelector(".location");
 var forecastEl = document.querySelector(".forecast-items");
-var key = "59698fd4ce1ba5e4033035d843a189b7"; 
+var key = "59698fd4ce1ba5e4033035d843a189b7";
 
 
 var dayToday = moment().format("MMMM Do YYYY");;
 
 $(document).ready(function () {      //shows Houston data on page load before requesting a city 
     // need to use geotag or whatever it's called
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=" +key+ "&units=imperial";
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=" + key + "&units=imperial";
     $.ajax({
         url: weatherURL,
         method: "GET"
@@ -34,19 +34,20 @@ $(document).ready(function () {      //shows Houston data on page load before re
         $(".dash").append(displayPres);
     })
 
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial&cnt=5";
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" + key + "&units=imperial&cnt=5";
     $.ajax({
         url: apiURL,
         method: "GET"
     }).then(function (response) {
         for (i = 0; i < response.list.length; i++) {
+            console.log(response.list[i]); 
             var forecastItems = $("<div>").text(response.list[i]);
             $(forecastEl).append(forecastItems);
         }
 
 
     })
-    }); 
+});
 
 $(".srchbtn").click(function () {
     console.log("click");
@@ -57,22 +58,22 @@ $(".srchbtn").click(function () {
         console.log("modal start")
         var modal = document.getElementById("cityModal");
         var span = document.getElementsByClassName("close")[0];
-        
-   
-            modal.style.display = "block";
-       
 
-        $(span).click(function() {
-            modal.style.display= "none";
+
+        modal.style.display = "block";
+
+
+        $(span).click(function () {
+            modal.style.display = "none";
         })
 
-       $(window).click(function(event) {
+        $(window).click(function (event) {
             if (event.target == modal) {
-                modal.style.display = "none"; 
+                modal.style.display = "none";
             }
         })
-        return; 
-       
+        return;
+
     };
 
     pastCities.push(currentCity);
@@ -124,8 +125,8 @@ $(".srchbtn").click(function () {
 
 
     function getTodayWeather() {
-    
-        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=" +key+ "&units=imperial";
+
+        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=" + key + "&units=imperial";
 
 
         $(".location").empty();
@@ -158,16 +159,16 @@ $(".srchbtn").click(function () {
 
             var displayPres = $("<li>").text("Pressure: " + response.main.pressure + " hPa");
             $(".dash").append(displayPres);
-        
+
         })
 
         fiveDay();
     };
 
-   
+
 
     function fiveDay() {
-        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" +key+ "&units=imperial&cnt=5";
+        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" + key + "&units=imperial&cnt=5";
         // var fiveDayStats = document.createElement("div");
         // $(".forecast-items").append(fiveDayStats); 
 

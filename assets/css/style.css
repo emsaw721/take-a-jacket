@@ -151,6 +151,11 @@ body {
     font-size: 50px;
 }
 
+.forecast-items {
+    display: flex; 
+    flex-wrap: wrap;
+}
+
 
 li{
     list-style:none; 
