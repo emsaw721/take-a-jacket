@@ -7,12 +7,6 @@ var weather;
     var dayToday = moment().format("MMMM Do YYYY");; 
 
 
-
-
-
-
-
-
 $(".srchbtn").click(function () {
     console.log("click");
 

@@ -46,7 +46,7 @@
     background-color: #082D4B;
     padding: 10px; 
 }
-.container {
+.row {
     background-color: var(--tertiary-color);
     color: white; 
     margin: 0; 
@@ -106,7 +106,7 @@
     background-color: rgba(225,225,225,0.5);
     text-align: left;
     margin: 15px 0 0 0; 
-    padding: 10px; 
+    padding: 10px 25% 10px 0; 
 
 }
 
