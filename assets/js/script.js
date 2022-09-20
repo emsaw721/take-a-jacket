@@ -30,19 +30,21 @@ $(document).ready(function () {      //shows Houston data on page load before re
         var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
         $(".dash").append(displayHum);
     })
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial";
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial&cnt=5";
     $.ajax({
         url: apiURL,
         method: "GET"
         
     }).then(function (response) {
     for (const list in response.list) {
+        localStorage.setItem("list", list); 
+        console.log(list); 
+    }
         for (const main in list.main) {
         for (i = 0; i < main.length; i++) {
             var forecastItems = $("<div>").text(main[i]);
             $(forecastEl).append(forecastItems);
         }
-    }
     }
     })
 
@@ -155,41 +157,17 @@ $(".srchbtn").click(function () {
 
             var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
             $(".dash").append(displayHum);
-            // response.clone().json().then(function (data) {
-            //     console.log(data)
-            //    for (const main in data.main) {
-            //         var tempLi = document.createElement("li");
-            //         var textStart= parseInt(data); 
-            //         console.log(textStart); 
-            //         var text =  textStart.text; 
-            //         tempLi.textContent = "Temp : " + text; 
-            //         $(".dash").append(tempLi);
-            //         console.log(tempLi)
-            //    } 
+        
 
-            //         var humLi = document.createElement("li");
-            //         var textStart= localStorage.getItem("data"); 
-            //         var text =  textStart.substring(245,247) + "%"; 
-            //         humLi.textContent = "Humidity : " + text; 
-            //         $(".dash").append(humLi);
-            //         console.log(humLi)
-
-
-            // }
-            // )
-            // }
-            // else {
-            //     alert("Error:" + response.statusText);
-            // }
         })
 
         fiveDay();
     };
 
-    // getCurrentCity();
+   
 
     function fiveDay() {
-        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" +key+ "&units=imperial";
+        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" +key+ "&units=imperial&cnt=5";
         // var fiveDayStats = document.createElement("div");
         // $(".forecast-items").append(fiveDayStats); 
 
@@ -197,29 +175,11 @@ $(".srchbtn").click(function () {
             url: apiURL,
             method: "GET"
         }).then(function (response) {
-            for (i = 3; i < response.list.length; i++) {
+            for (i = 0; i < response.list.length; i++) {
                 var forecastItems = $("<div>").text(response.list[i]);
                 $(forecastEl).append(forecastItems);
             }
 
-            // var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
-            // $(forecastEl).append(displayFeelsLike);
-
-            // var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
-            // $(forecastEl).append(displayHum);
-
-            //     fetch(apiURL).then(function (response) {
-            //         if (response.ok) {
-            //             response.clone().json().then(function (data) {
-
-            //                     fiveDayStats.textContent = "Humidity : "
-            //                     $(".forecast-items").append(fiveDayStats);
-            //                     console.log(fiveDayStats);
-
-
-            //             })
-            //         }
-            //     });
 
         })
     };
