@@ -54,7 +54,24 @@ $(".srchbtn").click(function () {
     var currentCity = $("#textarea").val();
     console.log(currentCity);
     if (currentCity === "") {
-        alert("Please enter city name.")
+        alert("Please type a city name.")
+        var modal = document.getElementById("cityModal");
+        var span = document.getElementsByClassName("close")[0];
+        
+        $(".srchbtn").click(function() {
+            modal.style.display = "block";
+        })
+
+        span.click(function() {
+            modal.style.display= "none";
+        })
+
+       $(window).click(function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; 
+            }
+        })
+
         return;
     };
 
