@@ -1,6 +1,7 @@
 
 var pastCities = [];
 var locationEl = document.querySelector(".location");
+var forecastEl = document.querySelector(".forecast-items"); 
 var weather;
 //var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity.value() + "&appid=59698fd4ce1ba5e4033035d843a189b7";
 
@@ -14,6 +15,7 @@ $(".srchbtn").click(function () {
     console.log(currentCity);
     if (currentCity === "") {
         alert("Please enter city name.")
+        return; 
     };
 
     pastCities.push(currentCity);
@@ -45,7 +47,7 @@ $(".srchbtn").click(function () {
 
     // getCityHistory();
     getTodayWeather();
-});
+
 
 
 // reloads weather information when past city button clicked
@@ -66,7 +68,7 @@ function getCityHistory() {
 function getTodayWeather() {
     // var currentCity = $("#textarea").val();
     // console.log(currentCity);
-    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
 
 
     // fetch(weatherURL).then(function (response) {
@@ -116,29 +118,30 @@ function getTodayWeather() {
         // }
     })
 
-
+    fiveDay();
 };
 
 // getCurrentCity();
 
 function fiveDay() {
-    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
-    var fiveDayStats = document.createElement("div");
-    $(".forecast-items").append(fiveDayStats); 
+    apiURL = "http://api.openweathermap.org/data/2.5/forecast?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    // var fiveDayStats = document.createElement("div");
+    // $(".forecast-items").append(fiveDayStats); 
 
     $.ajax({
         url: apiURL,
         method: "GET"
       }).then(function(response) {
-        var temperatureNumber = parseInt((response.list.main.temp));
-        var displayTemp = $("<p>").text("Tempeture: "+ temperatureNumber + " °F");
-        $(fiveDayStats).append(displayTemp);
+        for (i=3; i<response.list.length; i++) {
+            var forecastItems = $("<div>").text(response.list[i]); 
+                  $(forecastEl).append(forecastItems); 
+        }
       
-        var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
-        $(fiveDayStats).append(displayFeelsLike);
+        // var displayFeelsLike = $("<p>").text("Feels Like: "+ response.list.main.feels_like + " °F");
+        // $(forecastEl).append(displayFeelsLike);
         
-        var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
-        $(fiveDayStats).append(displayHum);
+        // var displayHum = $("<p>").text("Humidity: "+ response.list.main.humidity + " %");
+        // $(forecastEl).append(displayHum);
 
 //     fetch(apiURL).then(function (response) {
 //         if (response.ok) {
@@ -154,10 +157,10 @@ function fiveDay() {
 //     });
 
 })
-} 
+} ; 
 
+});
 
-fiveDay();
 
 
 
