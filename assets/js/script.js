@@ -7,7 +7,7 @@ var forecastEl = document.querySelector(".forecast-items");
 var dayToday = moment().format("MMMM Do YYYY");;
 
 $(document).ready(function () {      //shows Houston data on page load before requesting a city 
-    // need to use geotag or whatever it's called 
+    // need to use geotag or whatever it's called
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=Houston&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
     $.ajax({
         url: weatherURL,
