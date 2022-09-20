@@ -29,6 +29,9 @@ $(document).ready(function () {      //shows Houston data on page load before re
 
         var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
         $(".dash").append(displayHum);
+
+        var displayPres = $("<li>").text("Pressure: " + response.main.pressure + " hPa");
+        $(".dash").append(displayPres);
     })
 
     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" +key+ "&units=imperial&cnt=5";
@@ -152,8 +155,10 @@ $(".srchbtn").click(function () {
 
             var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
             $(".dash").append(displayHum);
-        
 
+            var displayPres = $("<li>").text("Pressure: " + response.main.pressure + " hPa");
+            $(".dash").append(displayPres);
+        
         })
 
         fiveDay();
