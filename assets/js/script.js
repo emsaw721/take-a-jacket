@@ -54,15 +54,15 @@ $(".srchbtn").click(function () {
     var currentCity = $("#textarea").val();
     console.log(currentCity);
     if (currentCity === "") {
-        alert("Please type a city name.")
+        console.log("modal start")
         var modal = document.getElementById("cityModal");
         var span = document.getElementsByClassName("close")[0];
         
-        $(".srchbtn").click(function() {
+   
             modal.style.display = "block";
-        })
+       
 
-        span.click(function() {
+        $(span).click(function() {
             modal.style.display= "none";
         })
 
@@ -71,8 +71,8 @@ $(".srchbtn").click(function () {
                 modal.style.display = "none"; 
             }
         })
-
-        return;
+        return; 
+       
     };
 
     pastCities.push(currentCity);
@@ -125,7 +125,7 @@ $(".srchbtn").click(function () {
 
     function getTodayWeather() {
     
-        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+        var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + currentCity + "&appid=" +key+ "&units=imperial";
 
 
         $(".location").empty();
@@ -189,7 +189,7 @@ $(".srchbtn").click(function () {
     // getCurrentCity();
 
     function fiveDay() {
-        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+        apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" +key+ "&units=imperial";
         // var fiveDayStats = document.createElement("div");
         // $(".forecast-items").append(fiveDayStats); 
 
