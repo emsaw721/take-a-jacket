@@ -69,6 +69,9 @@ function getTodayWeather() {
     // var currentCity = $("#textarea").val();
     // console.log(currentCity);
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
+    
+    
+    $(".card-initial").val(""); 
 
 
     // fetch(weatherURL).then(function (response) {
@@ -77,6 +80,8 @@ function getTodayWeather() {
                 url: weatherURL,
                 method: "GET"
               }).then(function(response) {
+
+
                   var cityName = $("<div>").text(response.name + "(" +dayToday+ ")"); 
                   $(locationEl).append(cityName); 
             
