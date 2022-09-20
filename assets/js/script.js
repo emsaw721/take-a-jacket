@@ -71,7 +71,10 @@ function getTodayWeather() {
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+currentCity+"&appid=59698fd4ce1ba5e4033035d843a189b7&units=imperial";
     
     
-    $(".card-initial").val(""); 
+        $(".location").empty(); 
+        $(".dash").empty(); 
+        $(forecastEl).empty(); 
+ 
 
 
     // fetch(weatherURL).then(function (response) {
