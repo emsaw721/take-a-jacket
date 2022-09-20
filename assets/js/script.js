@@ -2,7 +2,7 @@
 var pastCities = [];
 var locationEl = document.querySelector(".location");
 var forecastEl = document.querySelector(".forecast-items");
-var key = 59698fd4ce1ba5e4033035d843a189b7; 
+var key = "59698fd4ce1ba5e4033035d843a189b7"; 
 
 
 var dayToday = moment().format("MMMM Do YYYY");;
