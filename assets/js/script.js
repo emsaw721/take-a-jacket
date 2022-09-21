@@ -13,8 +13,11 @@ $(document).ready(function () {      //shows Houston data on page load before re
     $.ajax({
         url: weatherURL,
         method: "GET"
-    }).then(function (response) {
-
+    }).then(function (response) { 
+        var imgURL = "http://openweathermap.org/img/w/" +iconCode+ ".png"
+        var iconCode = response.weather[0].icon; 
+        $("#icon").attr("src", imgURL);
+        console.log(iconCode)
 
         var cityName = $("<div>").text(response.name + "(" + dayToday + ")");
         $(locationEl).append(cityName);
@@ -24,8 +27,8 @@ $(document).ready(function () {      //shows Houston data on page load before re
         var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F");
         $(".dash").append(displayTemp);
 
-        var displayFeelsLike = $("<li>").text("Feels Like: " + response.main.feels_like + " °F");
-        $(".dash").append(displayFeelsLike);
+        var displayWindSpeed = $("<li>").text("Wind Speed: " + response.wind.speed + "mph");
+        $(".dash").append(displayWindSpeed);
 
         var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
         $(".dash").append(displayHum);
@@ -39,11 +42,15 @@ $(document).ready(function () {      //shows Houston data on page load before re
         url: apiURL,
         method: "GET"
     }).then(function (response) {
-        for (i = 0; i < response.list.length; i++) {
-            console.log(response.list[i]);
-            var forecastItems = $("<div>").text(response.list[i]);
-            $(forecastEl).append(forecastItems);
-        }
+        response.json().then((response) => {
+            console.log(response)
+            
+            //      for (i = 0; i < response.list.length; i++) {
+            //     var forecastItems = $("<div>").text(response.list[i]);
+            //     $(forecastEl).append(forecastItems);
+            // }
+        })
+
 
 
     })
@@ -96,7 +103,7 @@ $(".srchbtn").click(function () {
         getTodayWeather();
         fiveDay();
     })
-    
+
 
     $("#textarea").val("");
 
@@ -128,8 +135,8 @@ $(".srchbtn").click(function () {
             var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F"); console.log($(".dash"))
             $(".dash").append(displayTemp);
 
-            var displayFeelsLike = $("<li>").text("Feels Like: " + response.main.feels_like + " °F");
-            $(".dash").append(displayFeelsLike);
+            var displayWindSpeed = $("<li>").text("Wind Speed: " + response.wind.speed + "mph");
+            $(".dash").append(displayWindSpeed);
 
             var displayHum = $("<li>").text("Humidity: " + response.main.humidity + " %");
             $(".dash").append(displayHum);
@@ -139,14 +146,14 @@ $(".srchbtn").click(function () {
 
         })
 
-       
+
     };
 
 
 
     function fiveDay() {
         apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" + key + "&units=imperial&cnt=5";
-       
+
 
         $.ajax({
             url: apiURL,
@@ -161,7 +168,7 @@ $(".srchbtn").click(function () {
             })
 
 
-            
+
         })
     };
 
