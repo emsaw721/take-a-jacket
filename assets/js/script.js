@@ -40,7 +40,7 @@ $(document).ready(function () {      //shows Houston data on page load before re
         method: "GET"
     }).then(function (response) {
         for (i = 0; i < response.list.length; i++) {
-            console.log(response.list[i]); 
+            console.log(response.list[i]);
             var forecastItems = $("<div>").text(response.list[i]);
             $(forecastEl).append(forecastItems);
         }
@@ -48,6 +48,8 @@ $(document).ready(function () {      //shows Houston data on page load before re
 
     })
 });
+
+
 
 $(".srchbtn").click(function () {
     console.log("click");
@@ -84,43 +86,21 @@ $(".srchbtn").click(function () {
 
     var btnContainer = document.getElementById("pastsearch");
 
-
     var btn = document.createElement("button");
     btn.innerHTML = currentCity;
     btn.setAttribute("class", "citybtn");
     btn.setAttribute("type", "button");
     btnContainer.append(btn);
-
-    // $(document).on("load", function(event) {
-    //    var buttonsStay = localStorage.getItem("pastcities");
-    //     btn.innerHTML =  JSON.parse(buttonsStay); 
-    //     btn.setAttribute("class", "citybtn");
-    //     btn.setAttribute("type", "button");
-    //     btnContainer.append(btn);
-    // }); 
-
+    btn.addEventListener("click", function (event) {
+        currentCity = $(this).text();
+        getTodayWeather();
+        fiveDay();
+    })
+    
 
     $("#textarea").val("");
 
-
-    getCityHistory();
     getTodayWeather();
-
-
-
-    // reloads weather information when past city button clicked
-    // gonna have to be a for loop
-    function getCityHistory() {
-        $(".citybtn").click(function (event) {
-            currentCity = $(this).text();
-
-        }
-        )
-
-    };
-
-
-
 
 
 
@@ -134,9 +114,6 @@ $(".srchbtn").click(function () {
         $(forecastEl).empty();
 
 
-
-        // fetch(weatherURL).then(function (response) {
-        // if (response.ok) {
         $.ajax({
             url: weatherURL,
             method: "GET"
@@ -148,7 +125,7 @@ $(".srchbtn").click(function () {
 
 
             var temperatureNumber = parseInt((response.main.temp));
-            var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F");
+            var displayTemp = $("<li>").text("Tempeture: " + temperatureNumber + " °F"); console.log($(".dash"))
             $(".dash").append(displayTemp);
 
             var displayFeelsLike = $("<li>").text("Feels Like: " + response.main.feels_like + " °F");
@@ -162,26 +139,29 @@ $(".srchbtn").click(function () {
 
         })
 
-        fiveDay();
+       
     };
 
 
 
     function fiveDay() {
         apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + currentCity + "&appid=" + key + "&units=imperial&cnt=5";
-        // var fiveDayStats = document.createElement("div");
-        // $(".forecast-items").append(fiveDayStats); 
+       
 
         $.ajax({
             url: apiURL,
             method: "GET"
         }).then(function (response) {
-            for (i = 0; i < response.list.length; i++) {
-                var forecastItems = $("<div>").text(response.list[i]);
-                $(forecastEl).append(forecastItems);
-            }
+            response.json().then((response) => {
+                console.log(response)
+                //      for (i = 0; i < response.list.length; i++) {
+                //     var forecastItems = $("<div>").text(response.list[i]);
+                //     $(forecastEl).append(forecastItems);
+                // }
+            })
 
 
+            
         })
     };
 
