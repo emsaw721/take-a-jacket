@@ -37,15 +37,17 @@ $(document).ready(function () {      //shows Houston data on page load before re
     })
 
 
-    var iconCodeStr = ""; 
-   var iconCode = iconCodeStr.charAt(inconCodeStr.length --);  
+    var iconCodeArr= []; 
+   var iconCode = iconCodeArr.slice(--)[0]; 
     var imgURL = "http://openweathermap.org/img/w/" +iconCode+ ".png";
+
+
     $.ajax({
         url: imgURL, 
         method: "GET"
     }).then(function(response){
         var resIconCode = response.weather[0].icon; 
-        iconCodeStr.concat(resIconCode); 
+        iconCodeArr.push(resIconCode); 
         $("#icon").attr("src", imgURL);
         console.log(iconCode)
     })
