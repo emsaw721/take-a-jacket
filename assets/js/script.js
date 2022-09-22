@@ -14,10 +14,6 @@ $(document).ready(function () {      //shows Houston data on page load before re
         url: weatherURL,
         method: "GET"
     }).then(function (response) { 
-        var imgURL = "http://openweathermap.org/img/w/" +iconCode+ ".png"
-        var iconCode = response.weather[0].icon; 
-        $("#icon").attr("src", imgURL);
-        console.log(iconCode)
 
         var cityName = $("<div>").text(response.name + "(" + dayToday + ")");
         $(locationEl).append(cityName);
@@ -35,20 +31,38 @@ $(document).ready(function () {      //shows Houston data on page load before re
 
         var displayPres = $("<li>").text("Pressure: " + response.main.pressure + " hPa");
         $(".dash").append(displayPres);
+
+   
+       
+    })
+
+
+    var iconCodeStr = ""; 
+   var iconCode = iconCodeStr.charAt(inconCodeStr.length --);  
+    var imgURL = "http://openweathermap.org/img/w/" +iconCode+ ".png";
+    $.ajax({
+        url: imgURL, 
+        method: "GET"
+    }).then(function(response){
+        var resIconCode = response.weather[0].icon; 
+        iconCodeStr.concat(resIconCode); 
+        $("#icon").attr("src", imgURL);
+        console.log(iconCode)
     })
 
     apiURL = "http://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=" + key + "&units=imperial&cnt=5";
     $.ajax({
         url: apiURL,
         method: "GET"
-    }).then(function (response) {
-        response.json().then((response) => {
-            console.log(response)
-            
-            //      for (i = 0; i < response.list.length; i++) {
-            //     var forecastItems = $("<div>").text(response.list[i]);
-            //     $(forecastEl).append(forecastItems);
-            // }
+    }).then(function(response) {
+        $.response.json().then((list) => {
+            console.log(list) 
+        
+                 for (i = 0; i < list.length; i++) {
+                var forecastItems = $("<div>").text(list[i]);
+                $(forecastEl).append(forecastItems);
+            }
+        
         })
 
 
@@ -103,7 +117,7 @@ $(".srchbtn").click(function () {
         getTodayWeather();
         fiveDay();
     })
-
+// had to use this event listener because before I was creating compounded event listeners to each new city added. 
 
     $("#textarea").val("");
 
