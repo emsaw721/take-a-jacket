@@ -154,6 +154,7 @@ body {
 .forecast-items {
     display: flex; 
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 

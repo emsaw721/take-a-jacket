@@ -72,8 +72,13 @@ $(document).ready(function () {      //shows Houston data on page load before re
             var forecastItems = $("<div>").text("Temperature:" + list[i].main.temp)
             var windSpeed = $("<div>").text("Wind Speed:" + list[i].wind.speed)
             var humidityElement = $("<div>").text("Humidity:" + list[i].main.humidity)
-            $(forecastEl).append(forecastItems, windSpeed, humidityElement)
+            //$(forecastEl).append(forecastItems, windSpeed, humidityElement)
             // card, var for each item, put item on card 
+
+            var forecastDisplays = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
+            console.log(forecastDisplays)
+
+            $(forecastEl).append(forecastDisplays) 
         }
 
     })
@@ -182,16 +187,18 @@ $(document).ready(function () {      //shows Houston data on page load before re
                 url: apiURL,
                 method: "GET"
             }).then(function (response) {
-                response.json().then((response) => {
-                    console.log(response)
-                    //      for (i = 0; i < response.list.length; i++) {
-                    //     var forecastItems = $("<div>").text(response.list[i]);
-                    //     $(forecastEl).append(forecastItems);
-                    // }
-                })
-
-
-
+                console.log(response)
+                var list = response.list
+                console.log(list)
+        
+                for (var i = 0; i < list.length; i++) {
+                    var forecastItems = $("<div>").text("Temperature:" + list[i].main.temp)
+                    var windSpeed = $("<div>").text("Wind Speed:" + list[i].wind.speed)
+                    var humidityElement = $("<div>").text("Humidity:" + list[i].main.humidity)
+                    
+                    // card, var for each item, put item on card 
+                 $(forecastEl).append(forecastItems, windSpeed, humidityElement)
+                }
             })
         };
 
