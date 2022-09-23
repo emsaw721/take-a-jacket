@@ -75,10 +75,10 @@ $(document).ready(function () {      //shows Houston data on page load before re
             //$(forecastEl).append(forecastItems, windSpeed, humidityElement)
             // card, var for each item, put item on card 
 
-            var forecastDisplays = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
-            console.log(forecastDisplays)
-
-            $(forecastEl).append(forecastDisplays) 
+            var forecastArr = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
+            // var forecastDisplays = $("div").text(forecastArr[i])
+            console.log(forecastArr)
+            $(forecastEl).append(forecastArr) 
         }
 
     })
@@ -197,7 +197,10 @@ $(document).ready(function () {      //shows Houston data on page load before re
                     var humidityElement = $("<div>").text("Humidity:" + list[i].main.humidity)
                     
                     // card, var for each item, put item on card 
-                 $(forecastEl).append(forecastItems, windSpeed, humidityElement)
+                    var forecastArr = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
+            // var forecastDisplays = $("div").text(forecastArr[i])
+           
+            $(forecastEl).append(forecastArr) 
                 }
             })
         };
