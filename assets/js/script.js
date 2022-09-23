@@ -78,7 +78,7 @@ $(document).ready(function () {      //shows Houston data on page load before re
             var forecastArr = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
             // var forecastDisplays = $("div").text(forecastArr[i])
             console.log(forecastArr)
-            $(forecastEl).append(forecastArr) 
+            $(forecastEl).append(forecastArr)
         }
 
     })
@@ -190,17 +190,17 @@ $(document).ready(function () {      //shows Houston data on page load before re
                 console.log(response)
                 var list = response.list
                 console.log(list)
-        
+
                 for (var i = 0; i < list.length; i++) {
                     var forecastItems = $("<div>").text("Temperature:" + list[i].main.temp)
                     var windSpeed = $("<div>").text("Wind Speed:" + list[i].wind.speed)
                     var humidityElement = $("<div>").text("Humidity:" + list[i].main.humidity)
-                    
+
                     // card, var for each item, put item on card 
                     var forecastArr = [forecastItems.text(), windSpeed.text(), humidityElement.text()]
-            // var forecastDisplays = $("div").text(forecastArr[i])
-           
-            $(forecastEl).append(forecastArr) 
+                    // var forecastDisplays = $("div").text(forecastArr[i])
+
+                    $(forecastEl).append(forecastArr)
                 }
             })
         };
